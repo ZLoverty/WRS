@@ -18,13 +18,13 @@ WORKDIR /app
 
 # Copy the requirements.txt file into the container.
 COPY requirements.txt .
-COPY readlib.py .
-COPY main.py .
-COPY rss.yaml .
 
 # Install any specified Python dependencies.
 # Using --no-cache-dir helps keep the image size small.
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code into the container.
+COPY . .
 
 # Expose the port that the application will listen on.
 # Cloud Run automatically sets the PORT environment variable to 8080 by default.
