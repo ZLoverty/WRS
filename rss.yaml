@@ -1,0 +1,10 @@
+- name: Nature
+  url: https://www.nature.com/nature/rss/current.xml
+- name: Science
+  url: https://www.science.org/rss/news_current.xml
+- name: PNAS 
+  url: https://www.pnas.org/rss/current.xml
+- name: PRL
+  url: https://feeds.aps.org/rss/tocsec/PRL-SoftMatterBiologicalandInterdisciplinaryPhysics.xml
+- name: Soft Matter
+  url: http://feeds.rsc.org/rss/sm
