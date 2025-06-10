@@ -8,10 +8,13 @@ import os
 
 app = Flask(__name__)
 
+# This will respond to GET requests on the root path, indicating the service is alive.
+@app.route('/', methods=['GET'])
+def health_check():
+    return "OK", 200
+
 @app.route('/', methods=['POST'])
-
 def main():
-
     # Configure the information sources (RSS feeds)
     target_feeds = read_rss_from_yaml("rss.yaml")
 
