@@ -4,7 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import markdown2
 from flask import Flask, request, jsonify
-import os
+import sys
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def health_check():
     return "OK", 200
 
 @app.route('/', methods=['POST'])
-def main():
+def send_summary_trigger():
     # Configure the information sources (RSS feeds)
     target_feeds = read_rss_from_yaml("rss.yaml")
 
@@ -80,11 +80,21 @@ def main():
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
         server.sendmail(SENDER_EMAIL, RECIPIENT_EMAIL, msg.as_string())
         print("Email sent successfully!")
+        return jsonify({"status": "success", "message": "Email sent successfully!"}), 200
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        # Catch any unexpected error that occurs in the function
+        print(f"An unexpected error occurred: {e}", file=sys.stderr)
+        # Log the full traceback for debugging purposes
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        return jsonify({"status": "error", "message": f"An error occurred: {str(e)}"}), 500
     finally:
+        # Ensure SMTP server connection is closed if it was opened
         if 'server' in locals() and server:
-            server.quit()
+            try:
+                server.quit()
+            except Exception as e:
+                print(f"Error while quitting SMTP server: {e}", file=sys.stderr)
 
 if __name__ == "__main__":
     # Get the port from the environment variable, defaulting to 8080 if not set.

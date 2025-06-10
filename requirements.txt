@@ -4,3 +4,4 @@ pyyaml==6.*
 feedparser==6.*
 google-genai==1.*
 flask
+gunicorn

@@ -37,4 +37,4 @@ EXPOSE 8080
 # The 'main:app' part tells Gunicorn to look for a Flask application instance
 # named 'app' inside the 'main.py' file.
 # The --bind 0.0.0.0:${PORT} ensures Gunicorn listens on the correct host and port.
-CMD ["gunicorn", "--bind", "0.0.0.0:${PORT}", "main:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "main:app"]

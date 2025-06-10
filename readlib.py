@@ -1,9 +1,11 @@
 import feedparser
 import datetime
 import time
-from google import genai
 import yaml
+from google import genai
 import os
+
+model_name = 'gemini-2.0-flash'
 
 prompt = (
         "You are a helpful assistant that summarizes scientific articles. " +
@@ -17,15 +19,13 @@ prompt = (
     )
 
 prompt2 = (
-        "You are a helpful assistant that summarizes scientific articles. " +
-        "Here are many summaries of a collection of articles." +
-        "{}" + 
-        "In a few sentences and concise language, describe the major themes of these articles." + 
-        "Provide links to a few important articles in [[number]](url)] style." +
-        "The links should be integrated into the text, not listed separately."
-)
-
-model_name = 'gemini-2.0-flash'
+            "You are a helpful assistant that summarizes scientific articles. " +
+            "Here are many summaries of a collection of articles." +
+            "{}" + 
+            "In a few sentences and concise language, describe the major themes of these articles." + 
+            "Provide links to a few important articles in [[number]](url)] style." +
+            "The links should be integrated into the text, not listed separately."
+    )
 
 try:
     # Attempt to get the API key from an environment variable
@@ -38,14 +38,14 @@ try:
         print("Warning: GOOGLE_API_KEY environment variable not set. Summarization will be skipped.")
     else:
         # Correctly initialize the client for the new SDK
+        global client
         client = genai.Client(api_key=GOOGLE_API_KEY)
+        
 except ImportError:
     print("Warning: The 'google.genai' package is not installed. Summarization will be skipped.")
 except Exception as e:
     print(f"Error initializing Gemini client: {e}. Summarization will be skipped.")
-
-
-
+    
 def get_articles_from_rss(feed_url: str):
     """
     Parses an RSS feed and returns a list of article entries.
@@ -151,6 +151,8 @@ def analyze_article_collection(articles_summaries: list) -> str:
     """
     summaries = "\n\n\n".join(articles_summaries)
     
+    
+
     response = client.models.generate_content(
         model = model_name, 
         contents = prompt2.format(summaries)
