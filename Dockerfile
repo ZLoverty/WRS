@@ -3,6 +3,16 @@
 # for consistency and security.
 FROM python:3.9-slim-buster
 
+# Install build dependencies that are often required by Python packages with C extensions.
+# apt-get update refreshes the package lists.
+# build-essential provides essential compilation tools (gcc, make, etc.).
+# These are removed at the end of the command to keep the final image size small.
+# You might need to add other libraries here if specific packages require them
+# (e.g., libpq-dev for PostgreSQL drivers, libffi-dev, etc.).
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set the working directory in the container.
 WORKDIR /app
 
