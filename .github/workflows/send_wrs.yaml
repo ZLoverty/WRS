@@ -9,10 +9,7 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
 
-    env:
-        GoogleAppPW: ${{ GoogleApp.GoogleAppPW }}
-        GOOGLE_API_KEY: ${{ GoogleApp.GOOGLE_API_KEY }}
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,5 +23,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run the script
+
+        env:
+          GoogleAppPW: ${{ secrets.GoogleAppPW }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
         run: |
           python main.py
