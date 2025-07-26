@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-        GoogleAppPW: ${{ secrets.GoogleApp.GoogleAppPW }}
-        GOOGLE_API_KEY: ${{ secrets.GoogleApp.GOOGLE_API_KEY }}
+        GoogleAppPW: ${{ GoogleApp.GoogleAppPW }}
+        GOOGLE_API_KEY: ${{ GoogleApp.GOOGLE_API_KEY }}
 
     steps:
       - name: Checkout repository
