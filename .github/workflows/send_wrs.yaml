@@ -9,10 +9,12 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
 
+    env:
+        GoogleAppPW: ${{ secrets.GoogleAppPW }}
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
