@@ -1,7 +1,9 @@
 name: My Workflow with Custom Variables
 
 on: [push]
-
+env:
+  GOOGLE_API_KEY: ${{ vars.GOOGLE_API_KEY }}
+  
 jobs:
   build:
     runs-on: ubuntu-latest
