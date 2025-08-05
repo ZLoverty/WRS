@@ -1,0 +1,13 @@
+name: My Workflow with Custom Variables
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use variables
+        # Step-level variable
+        run: |
+          echo "API Key: $GOOGLE_API_KEY"
