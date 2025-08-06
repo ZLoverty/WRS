@@ -21,5 +21,6 @@ jobs:
       - name: Run the script
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_APP_PW: ${{ secrets.GOOGLE_APP_PW }}
         run: |
           python main.py
