@@ -8,3 +8,9 @@
   url: https://feeds.aps.org/rss/tocsec/PRL-SoftMatterBiologicalandInterdisciplinaryPhysics.xml
 - name: Soft Matter
   url: http://feeds.rsc.org/rss/sm
+- name: 3dprint
+  url: https://3dprint.com/feed/
+- name: 3D Printing Industry
+  url: https://3dprintingindustry.com/feed/
+- name: TCT Magazine
+  url: https://www.tctmagazine.com/additive-manufacturing-news/feed/
